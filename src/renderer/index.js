@@ -15,6 +15,7 @@ import ProjectPlayer from './components/ProjectPlayer';
 import CreateProject from './components/CreateProject';
 import ProjectEditForm from './components/ProjectEditForm';
 import ProjectDetail from './components/ProjectDetail';
+import Visualizer from './components/Visualizer.js';
 import WorkSpace from './components/WorkSpace';
 
 import reducers from './reducers/index';
@@ -85,6 +86,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <Switch>
                     <Route component={ProjectPlayer} path="/play/:projectId" />
                     <Route component={WorkSpace} path="/workspace" />
+                    <Route component={Visualizer} path="/visualizer/:projectId" />
                     <Route
                         path="/"
                         render={() => (
