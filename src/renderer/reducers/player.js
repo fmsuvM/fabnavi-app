@@ -26,6 +26,7 @@ export default handleActions({
         if(action.payload.pathname === '/') {
             return initialState
         }
+      return state; // for visualizer mode
     },
     PLAYER_CHANGE_PAGE: (state, action) => {
         debug('player change', action);
