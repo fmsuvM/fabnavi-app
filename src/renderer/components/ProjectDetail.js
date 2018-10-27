@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Debug from 'debug';
+import { push } from 'react-router-redux';
+
 import Player from './Player';
 import DeleteModal from '../components/DeleteModal';
 import CaptionList from './CaptionList';
@@ -29,6 +31,10 @@ const debug = Debug('fabnavi:jsx:ProjectDetail');
 export class ProjectDetail extends React.Component {
     constructor(props) {
         super(props);
+
+        this.jumpVisualizeProject = () => {
+            if(this.props.project)this.props.visualizeProject(this.props.projectId);
+        };
     }
 
     render() {
@@ -70,9 +76,12 @@ export class ProjectDetail extends React.Component {
                             </StatusFrame>
                         </ContentsFrame>
                         <CaptionList
-                            figures={project.content.map(content => content.figure).sort((fig1, fig2) => fig1.position - fig2.position)}
+                            figures={project.content
+                                .map(content => content.figure)
+                                .sort((fig1, fig2) => fig1.position - fig2.position)}
                             contentType={this.props.contentType}
                         />
+                        <div onClick={this.jumpVisualizeProject}>Jump !!</div>
                         {this.props.showDeleteConfirmation ? <DeleteModal /> : <span />}
                     </StyledDetailFrame>
                 ) : (
@@ -89,10 +98,11 @@ ProjectDetail.propTypes = {
     userIsAdmin: PropTypes.bool,
     showDeleteConfirmation: PropTypes.bool,
     targetProject: PropTypes.number,
-    contentType: PropTypes.string
+    contentType: PropTypes.string,
+    visualizeProject: PropTypes.func
 };
 
-export const mapStateToProps = state => ({
+const mapStateToProps = state => ({
     project: state.manager.targetProject,
     userId: state.user.id,
     userIsAdmin: state.user.isAdmin,
@@ -101,7 +111,13 @@ export const mapStateToProps = state => ({
     contentType: state.player.contentType
 });
 
+const mapDispatchToProps = dispatch => ({
+    visualizeProject: projectId => {
+        dispatch(push(`/visualizer/${projectId}`));
+    }
+});
+
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(ProjectDetail);
