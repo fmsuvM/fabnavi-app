@@ -18,15 +18,21 @@ class Visualizer extends React.Component {
   render() {
     return (
       <PageFrame>
-        <ProcessVisualizer />
+        <ProcessVisualizer project={this.props.project} />
       </PageFrame>
     );
   }
 }
 
-Visualizer.propTypes = {};
+Visualizer.propTypes = {
+  project: PropTypes.object
+};
+
+const mapStateToProps = state => ({
+  project: state.player.project
+});
 
 export default connect(
-  null,
+  mapStateToProps,
   null
 )(Visualizer);
