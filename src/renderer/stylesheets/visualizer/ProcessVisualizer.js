@@ -1,23 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Debug from 'debug';
+import styled, { css } from 'styled-components';
 
-const debug = Debug('fabnavi:components:ProcessVisualizer');
-
-export default class ProcessVisualizer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div>
-        <p>hoge</p>
-      </div>
-    );
-  }
-}
-
-ProcessVisualizer.propTypes = {};
+export const VisualizeFrame = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 30px 50px 30px 50px;
+`;
